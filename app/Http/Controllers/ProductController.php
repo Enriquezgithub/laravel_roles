@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $prod = Product::orderBy('id')->get();
+        $prod = Product::orderBy('price');
+
+        if ($request->has('filter')) {
+            $prod->where('name', 'like', '%' . $request->filter . '%');
+        }
+
+        $prod = $prod->paginate(5);
+
         return view('product.index', compact('prod'));
     }
 

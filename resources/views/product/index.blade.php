@@ -1,6 +1,13 @@
 <x-app-layout>
     <div class="p-6 relative">
-        <div class="bg-white">
+        <div class="absolute right-8 top-3">
+            <form action="/products" method="GET">
+                <input type="text" class="border border-slate-200 rounded" placeholder="Search" name="filter">
+                <button type="submit"
+                    class="bg-blue-300 text-blue-600 py-2 px-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Search</button>
+            </form>
+        </div>
+        <div class="bg-white mt-9">
             <div class="flex p-2 justify-between items-center">
                 <div class="text-xl font-bold tracking-wider">Product List</div>
                 <button class="bg-green-400 text-green-800 p-2 rounded font-bold">Export Excel</button>
@@ -25,7 +32,8 @@
             @endif
 
         </div>
-        <div class="h-[75vh] overflow-y-auto">
+
+        <div class="max-h-[55vh] overflow-y-auto">
             <table class="min-w-full divide-y divide-gray-200 mt-8 ">
                 <thead class="bg-gray-50">
                     <tr>
@@ -86,8 +94,12 @@
             </table>
         </div>
 
+        <div class="mt-8">
+            {{ $prod->links() }}
+        </div>
+
         @can('create_product')
-            <button class="bg-blue-600 p-3 w-[3%] rounded-full fixed right-10 bottom-20 font-bold"
+            <button class="bg-blue-600 bg-opacity-50 p-3 w-[3%] rounded-full fixed right-10 bottom-20 font-bold"
                 onclick="document.getElementById('trigger').classList.remove('hidden')">+</button>
         @endcan
 
