@@ -22,6 +22,20 @@
                         {{ __('Product') }}
                     </x-nav-link>
                 </div>
+
+                @can('create_product')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('logs')" :active="request()->routeIs('logs')">
+                            {{ __('Log') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="/sendmail" target="_blank">
+                        {{ __('Send Email') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
